@@ -38,8 +38,6 @@ public class SpeakerService {
         speakerRepository.save(speaker);
     }
 
-
-
     public void deleteSpeaker(Long speakerId) {
         if (speakerRepository.existsById(speakerId)) {
             speakerRepository.deleteById(speakerId);
