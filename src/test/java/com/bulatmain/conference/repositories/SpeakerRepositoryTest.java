@@ -1,7 +1,6 @@
-package com.bulatmain.conference.repository;
+package com.bulatmain.conference.repositories;
 
 import com.bulatmain.conference.entities.Speaker;
-import com.bulatmain.conference.repositories.SpeakerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

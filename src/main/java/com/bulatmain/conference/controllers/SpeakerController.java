@@ -1,10 +1,12 @@
 package com.bulatmain.conference.controllers;
 
+import com.bulatmain.conference.dto.SpeakerDTO;
 import com.bulatmain.conference.entities.Speaker;
 import com.bulatmain.conference.services.SpeakerService;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,29 +19,30 @@ public class SpeakerController {
     private SpeakerService speakerService;
 
     @GetMapping
-    public List<Speaker> getSpeakers() {
-        return speakerService.getSpeakers();
+    public ResponseEntity<List<SpeakerDTO>> getSpeakers() {
+        return new ResponseEntity<>(speakerService.getSpeakers(), HttpStatus.OK);
     }
 
     @GetMapping("/{speaker_id}")
-    public Speaker getSpeakerById(@PathVariable("speaker_id") Long speakerId) {
-        return speakerService.getSpeakerById(speakerId);
+    public ResponseEntity<SpeakerDTO> getSpeakerById(@PathVariable("id") Long speakerId) {
+        return new ResponseEntity<>(speakerService.getSpeakerById(speakerId), HttpStatus.OK);
     }
 
     @PostMapping
-    public Long registerNewSpeaker(@RequestBody Speaker speaker) {
-        speakerService.saveSpeaker(speaker);
-        return speaker.getId();
+    public ResponseEntity<Long> registerNewSpeaker(@RequestBody SpeakerDTO speakerDTO) {
+        speakerService.saveSpeaker(speakerDTO);
+        return new ResponseEntity<>(speakerDTO.getId(), HttpStatus.CREATED);
     }
 
-//    @PutMapping
-//    @Transactional
-//    public void updateSpeaker(@RequestBody Speaker speaker) {
-//
-//    }
+    @PutMapping
+    public ResponseEntity<SpeakerDTO> updateSpeaker(@RequestBody SpeakerDTO speakerDTO, @PathVariable("id") Long speakerId) {
+        SpeakerDTO response = speakerService.update(speakerDTO, speakerId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @DeleteMapping("/{speaker_id}")
-    public void deleteSpeaker(@PathVariable("speaker_id") Long speakerId) {
+    public ResponseEntity<String> deleteSpeaker(@PathVariable("speaker_id") Long speakerId) {
         speakerService.deleteSpeaker(speakerId);
+        return new ResponseEntity<>("Speaker deleted", HttpStatus.OK);
     }
 }
