@@ -1,7 +1,6 @@
 package com.bulatmain.conference.controllers;
 
 import com.bulatmain.conference.dto.SpeakerDTO;
-import com.bulatmain.conference.entities.Speaker;
 import com.bulatmain.conference.services.SpeakerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
