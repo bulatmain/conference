@@ -22,7 +22,7 @@ public class ConferenceController {
         return new ResponseEntity<>(ConferenceService.getConferences(), HttpStatus.OK);
     }
 
-    @GetMapping("/{Conference_id}")
+    @GetMapping("/{conference_id}")
     public ResponseEntity<ConferenceDTO> getConferenceById(@PathVariable("id") Long conferenceId) {
         return new ResponseEntity<>(ConferenceService.getConferenceById(conferenceId), HttpStatus.OK);
     }
@@ -39,7 +39,7 @@ public class ConferenceController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{Conference_id}")
+    @DeleteMapping("/{conference_id}")
     public ResponseEntity<String> deleteConference(@PathVariable("conference_id") Long ConferenceId) {
         ConferenceService.deleteConference(ConferenceId);
         return new ResponseEntity<>("Conference deleted", HttpStatus.OK);
